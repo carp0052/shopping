@@ -24,17 +24,41 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <title>Shopping List</title>
+        <link rel="stylesheet" href="themes/shopping.min.css" />
+	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
+        
+            
+            <div data-role="page" id="home">
+              <div data-role="header" data-position="fixed" class="header">
+                <h1>Shopping List</h1>
+              </div>
+                <div data-role="content">
+
+
+                     <ul data-role="listview" id="addedItem">
+
+                    </ul>
+
+                </div>
+
+            <div data-role="footer" data-position="fixed">
+                  <form data-role="controlgroup" data-type="horizontal" action="#" id='form' method="post">
+                    <input type="text" name="newItem" id="newItem" data-wrapper-class="controlgroup-textinput ui-btn" placeholder="new item"/>
+                    <button id="addItem" class="ui-btn ui-icon-plus ui-btn-icon-right">Add Item</button>
+                  </form>
+
+                </div>
         </div>
+        
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
