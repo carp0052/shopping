@@ -36,8 +36,6 @@ body {
 
 
 .header{
-    background: url(../img/carp0052-logo.png) no-repeat fixed;
-    background-size: 45px;
     height: 45px;
     font-size: 16px;
 }
@@ -46,7 +44,25 @@ body {
     text-align: right;   
 }
 
+#addedItem{
+    position: relative;
+}
+
+
 .controlgroup-textinput{
     padding-top:.21rem;
     padding-bottom:.21rem;
+}
+
+
+.right{
+    position: absolute;
+    right: 0;   
+    bottom: -4px;
+}
+
+
+.check{
+    text-decoration: line-through;
+    color: red;
 }

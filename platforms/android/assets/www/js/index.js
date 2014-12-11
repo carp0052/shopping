@@ -42,8 +42,8 @@ var shopping_carp0052 = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
           
-          if(localStorage.getItem("shopping-carp0052")){
-            shopping_carp0052.shoppingList = JSON.parse(localStorage.getItem("shopping-carp0052"));
+          if(localStorage.getItem("grocery-carp0052")){
+            shopping_carp0052.shoppingList = JSON.parse(localStorage.getItem("grocery-carp0052"));
            // console.log("exists");
             shopping_carp0052.showList();
           }else{
@@ -62,7 +62,7 @@ var shopping_carp0052 = {
                     return false;
                 }                
                 shopping_carp0052.shoppingList.push(newItem);                
-                localStorage.setItem("shopping-carp0052", JSON.stringify(shopping_carp0052.shoppingList) );
+                localStorage.setItem("grocery-carp0052", JSON.stringify(shopping_carp0052.shoppingList) );
                 shopping_carp0052.showList();
                 $("input:text").val("");
                 
@@ -72,14 +72,35 @@ var shopping_carp0052 = {
     
     removeItem:function (ev){
                 
-                var txt = ev.currentTarget.firstChild.nodeValue;        
+                var txt = ev.currentTarget.parentNode.firstChild.nodeValue;        
                 for(var i=0;i<shopping_carp0052.shoppingList.length;i++){
                   if(shopping_carp0052.shoppingList[i] == txt){
                       shopping_carp0052.shoppingList.splice(i, 1);               
                       localStorage.removeItem(shopping_carp0052.item);
                   }
                 }
-            localStorage.setItem("shopping-carp0052", JSON.stringify(shopping_carp0052.shoppingList) );
+            localStorage.setItem("grocery-carp0052", JSON.stringify(shopping_carp0052.shoppingList) );
+            shopping_carp0052.showList();
+ },
+    
+    markItem:function (ev){
+        
+            ev.preventDefault();
+               
+        
+        
+               // var txt = ev.currentTarget.firstChild.nodeValue;   
+                var txt = this.firstChild.nodeValue;
+                for(var i=0;i<shopping_carp0052.shoppingList.length;i++){
+                  if(shopping_carp0052.shoppingList[i] == txt){
+                      
+                      $(this).toggleClass("check"); 
+                      $("addedItems").listview();
+                      $(".addedItems").listview('refresh');
+                     //issue with jQuery mobile listview refresh             
+                  }
+                }
+            localStorage.setItem("grocery-carp0052", JSON.stringify(shopping_carp0052.shoppingList) );
             shopping_carp0052.showList();
  },
     
@@ -88,22 +109,23 @@ var shopping_carp0052 = {
                 list.innerHTML = "";
             
             for(var i=0;i<shopping_carp0052.shoppingList.length;i++){
-               // var remove = document.createElement("span");
-                //remove.setAttribute("class", "ui-btn ui-icon-minus ui-btn-icon-notext ui-corner-all");
-                    
-                        
+                var remove = document.createElement("button");
+                remove.setAttribute("class", "ui-btn ui-btn-inline ui-icon-minus ui-btn-icon-notext ui-corner-all ui-mini right");                      
                 
                 var item = document.createElement("li");
+                item.setAttribute("class", "addedItems");
                 item.innerHTML = shopping_carp0052.shoppingList[i];    
                 
                 
                 list.appendChild(item);
-               // item.appendChild(remove);
+                item.appendChild(remove);
+                
                 
                 $(list).listview('refresh');
                 
-                
-                item.addEventListener("click", shopping_carp0052.removeItem);
+                remove.addEventListener("click", shopping_carp0052.removeItem);
+                //item.addEventListener("click", shopping_carp0052.removeItem);
+                item.addEventListener("click", shopping_carp0052.markItem);
           }       
     }
 };
